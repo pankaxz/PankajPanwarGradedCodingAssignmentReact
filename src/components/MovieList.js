@@ -6,17 +6,22 @@ import MovieCard from './MovieCard'
 function MovieList({ listType, data }) {
   const [favMovieList, setFavMovieList] = useState([])
 
-  useEffect(() => {
-    async function GetMoviesInFavs() {
-      try {
-        const response = await axios.get('http://localhost:3001/favourite')
-        setFavMovieList(response.data)
-      } catch (error) {
-        console.log(error)
-      }
+  async function GetMoviesInFavs() {
+    try {
+      const response = await axios.get('http://localhost:3001/favourite')
+      setFavMovieList(response.data)
+    } catch (error) {
+      console.log(error)
     }
+  }
+
+  useEffect(() => {
     GetMoviesInFavs()
   }, [listType])
+
+  function RefreshList() {
+    GetMoviesInFavs()
+  }
 
   return (
     <div className={css(styles.MovieListContainer)}>
@@ -26,7 +31,8 @@ function MovieList({ listType, data }) {
           return (
             <MovieCard
               movie={movie}
-              MovieInFavs={favMovieList.map((a) => a.title)}
+              RefreshFavsList={RefreshList}
+              MovieInFavs={favMovieList}
             />
           )
         })}
@@ -39,7 +45,7 @@ export default MovieList
 
 const styles = StyleSheet.create({
   MovieListContainer: {
-    backgroundColor: 'grey ',
+    // backgroundColor: 'grey ',
     display: 'flex',
     // margin: '0 auto',
     // position: 'absolute',

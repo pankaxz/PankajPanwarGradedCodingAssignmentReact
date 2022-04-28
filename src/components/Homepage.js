@@ -6,7 +6,7 @@ import Sidebar from './Sidebar'
 import { css, StyleSheet } from 'aphrodite'
 
 function Homepage() {
-  const [currentCategory, setCurrentCategory] = useState('movies-in-theaters')
+  const [currentCategory, setCurrentCategory] = useState('')
   const [dataArr, setDataArr] = useState([])
   const [inputDataArr, setinputDataArr] = useState([])
   const [inputSearchData, setInputSearchData] = useState('')
@@ -36,8 +36,10 @@ function Homepage() {
   }
 
   useEffect(() => {
-    UpdateCat('movies-in-theaters')
-  }, [])
+    currentCategory
+      ? UpdateCat(currentCategory)
+      : UpdateCat('movies-in-theaters')
+  }, [currentCategory])
 
   useEffect(() => {
     let temp = dataArr.filter((data) => {

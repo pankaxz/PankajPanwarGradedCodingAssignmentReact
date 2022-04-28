@@ -51,14 +51,10 @@ export default Sidebar
 const styles = StyleSheet.create({
   SidebarContainer: {
     height: '100%',
-    // width: '100%',
-    // position: 'fixed',
-    // zIndex: '1',
     top: '0',
     left: '0',
-    backgroundColor: '#111',
+    backgroundColor: '#18191a',
     transition: '0.5s',
-    // overflowX: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
